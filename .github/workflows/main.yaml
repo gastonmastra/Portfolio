@@ -22,7 +22,7 @@ jobs:
       - name: Build application
         run: npm run build
       - name: Deploy to GitHub Pages
-        working-directory: ..
+        working-directory: .
         run: |
           npx angular-cli-ghpages --dir=frontend/dist/frontend --no-silent
         env:
