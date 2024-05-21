@@ -26,4 +26,4 @@ jobs:
         with:
           folder: frontend/dist/browser
           branch: prod
-          token: ${{ secrets.Portfolio }}
+          token: ${{ secrets.PAGE }}
