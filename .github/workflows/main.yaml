@@ -24,7 +24,7 @@ jobs:
       - name: Deploy to GitHub Pages
         working-directory: .
         run: |
-          npx angular-cli-ghpages --dir=frontend/dist/frontend --no-silent
+          npx angular-cli-ghpages --dir=./frontend/dist/frontend --no-silent
         env:
           CI: true
           GH_TOKEN: ${{ secrets.Portfolio }} 
