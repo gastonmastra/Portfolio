@@ -9,22 +9,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Set up NodeJs
+        uses: actions/setup-node@v3
         with: 
-          node-version: 18
-      - name: Install dependencies
-        run: npm install
-      - name: Build application
-        run: npm run build
+          node-version: 20
+
+      - name: Install dependencies and build
+        working-directory: frontend
+        run: npm install && npm run build
+
       - name: Deploy to GitHub Pages
-        working-directory: .
-        run: |
-          npx angular-cli-ghpages --dir=./frontend/dist/frontend --no-silent
-        env:
-          CI: true
-          GH_TOKEN: ${{ secrets.Portfolio }} 
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: frontend/dist/frontend
+          branch: prod
+          token: ${{ secrets.Portfolio }}
