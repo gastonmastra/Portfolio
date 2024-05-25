@@ -5,8 +5,10 @@
       <h2 class="text-center text-3xl">Tech stack</h2>
       <div class="flex mt-3 justify-center gap-4 flex-wrap">
         @for (technology of technologiesShowed(); track $index) {
-        <technology class="w-24" [technologyKnowledge]="technology"
-        (click)="select(technology)"></technology>
+        <technology 
+        class="w-24" [technologyKnowledge]="technology"
+        (click)="select(technology)" [scale]="true"
+        [tooltip]="technology.name"></technology>
         }
       </div>
     </div>
@@ -14,8 +16,9 @@
       <h2 class="text-center text-3xl">Tools</h2>
       <div class="flex mt-3 justify-center gap-4 flex-wrap">
         @for (technology of toolsShowed(); track $index) {
-        <technology class="w-24" [technologyKnowledge]="technology"
-        (click)="select(technology)"></technology>
+        <technology
+        class="w-24" [technologyKnowledge]="technology"
+        (click)="select(technology)" [scale]="true"></technology>
         }
       </div>
     </div>

@@ -1,5 +1,13 @@
-<img
-srcset="{{ technologyKnowledge.logoUrl }}"
-alt="{{ technologyKnowledge.name }} logo"
-class="cursor-pointer hover:drop-shadow-xl"
-/>
+<div class="group">
+  <img
+  srcset="{{ technologyKnowledge.logoUrl }}"
+  alt="{{ technologyKnowledge.name }} logo"
+  class="cursor-pointer hover:drop-shadow-xl duration-200 group"
+  [ngClass]=" scale? 'hover:scale-125' : '' "
+  />
+  @if (tooltip) {
+    <div class="bg-black opacity-55 backdrop-blur-xl text-white group-hover:block hidden rounded-full p-3 mt-4 absolute">
+      <p>{{ tooltip }}</p>
+    </div>
+  }
+</div>
