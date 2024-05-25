@@ -1,7 +1,6 @@
 import { Component, HostBinding, OnInit, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
-import { initFlowbite } from 'flowbite';
 import { DarkmodeService } from './services/darkmode.service';
 
 @Component({
@@ -24,6 +23,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    initFlowbite();
   }
 }
