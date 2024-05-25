@@ -1,1 +1,10 @@
-<p>experience works!</p>
+<div>
+  @for (experience of experiences; track $index) {
+  <card
+    [title]="experience.title"
+    [subtitle]="experience.company"
+    description="{{ experience.workingPeriod }}"
+  >
+  </card>
+  }
+</div>

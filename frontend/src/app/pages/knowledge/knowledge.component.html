@@ -1,1 +1,36 @@
-<p>knowledge works!</p>
+<div class="flex flex-col h-full">
+  <!--Logos-->
+  <div class="grid grid-row grid-cols-2 p-3 gap-4">
+    <div class="">
+      <h2 class="text-center text-3xl">Tech stack</h2>
+      <div class="flex mt-3 justify-center gap-4 flex-wrap">
+        @for (technology of technologiesShowed(); track $index) {
+        <technology class="w-24" [technologyKnowledge]="technology"
+        (click)="select(technology)"></technology>
+        }
+      </div>
+    </div>
+    <div>
+      <h2 class="text-center text-3xl">Tools</h2>
+      <div class="flex mt-3 justify-center gap-4 flex-wrap">
+        @for (technology of toolsShowed(); track $index) {
+        <technology class="w-24" [technologyKnowledge]="technology"
+        (click)="select(technology)"></technology>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!--Description-->
+  @if (knowledgeSelected) {
+    <div class="flex justify-center">
+      <technology class="w-64" [technologyKnowledge]="knowledgeSelected"
+      (click)="unselect()"></technology>
+    </div>
+    @if (knowledgeSelected.usageDescription) {
+      <div class="bg-sky-300 dark:bg-gray-950 min-h-32 m-3 p-3 rounded-2xl">
+        <p class="text-justify w-full">{{ knowledgeSelected.usageDescription }}</p>
+      </div>
+    }
+  }
+</div>
