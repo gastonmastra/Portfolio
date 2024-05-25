@@ -1,4 +1,4 @@
-import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 
 const DARKMODE: string = "DARKMODE";
@@ -8,13 +8,11 @@ const DARKMODE: string = "DARKMODE";
 })
 export class DarkmodeService {
   private darkmodeEnabled: WritableSignal<boolean>;
-  protected readonly darkmode$: Signal<boolean>;
 
   readonly enabled: Signal<boolean>;
   
   constructor() {
     this.darkmodeEnabled = signal(this.isEnabled());
-    this.darkmode$ = computed(() => this.darkmodeEnabled());
     this.enabled = this.darkmodeEnabled.asReadonly()
   }
 

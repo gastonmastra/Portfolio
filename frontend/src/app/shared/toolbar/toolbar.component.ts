@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, Signal, computed, signal } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { DarkmodeService } from '../../services/darkmode.service';
 import { RouterLink } from '@angular/router';
 
@@ -9,21 +9,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
 
   darkmodeEnabled: Signal<boolean>;
 
-  @HostBinding('class.dark') get mode() {
-    return this.darkmodeEnabled();
-  }
-
-  constructor(
-    private _darkmodeService: DarkmodeService
-  ) { 
-    this.darkmodeEnabled = _darkmodeService.enabled;
-  }
-
-  ngOnInit(): void {
+  constructor(private _darkmodeService: DarkmodeService) {
+    this.darkmodeEnabled = this._darkmodeService.enabled;
   }
 
   toggleDarkmode(): void {
