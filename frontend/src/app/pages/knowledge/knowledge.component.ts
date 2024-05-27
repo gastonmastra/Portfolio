@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, WritableSignal, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { TechnologyKnowledge } from '../../models/technology-knowledge';
 import { TechnologyComponent } from './technology/technology.component';
 import { ToolKnowledge } from '../../models/tool-knowledge';

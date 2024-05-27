@@ -7,7 +7,8 @@
         @for (technology of technologiesShowed(); track $index) {
         <technology 
         class="w-24" [technologyKnowledge]="technology"
-        (click)="select(technology)" [scale]="true"
+        [scale]="true"
+        (click)="select(technology)"
         [tooltip]="technology.name"></technology>
         }
       </div>
@@ -15,10 +16,11 @@
     <div>
       <h2 class="text-center text-3xl">Tools</h2>
       <div class="flex mt-3 justify-center gap-4 flex-wrap">
-        @for (technology of toolsShowed(); track $index) {
+        @for (tool of toolsShowed(); track $index) {
         <technology
-        class="w-24" [technologyKnowledge]="technology"
-        (click)="select(technology)" [scale]="true"></technology>
+        class="w-24" [technologyKnowledge]="tool"
+        (click)="select(tool)" [scale]="true"
+        [tooltip]="tool.name"></technology>
         }
       </div>
     </div>
@@ -30,10 +32,14 @@
       <technology class="w-64" [technologyKnowledge]="knowledgeSelected"
       (click)="unselect()"></technology>
     </div>
+    <h3 class="text-3xl font-extrabold text-center mt-3">{{ knowledgeSelected.name }}</h3>
     @if (knowledgeSelected.usageDescription) {
       <div class="bg-sky-300 dark:bg-gray-950 min-h-32 m-3 p-3 rounded-2xl">
         <p class="text-justify w-full">{{ knowledgeSelected.usageDescription }}</p>
       </div>
+    }
+    @else {
+      <p class="text-center m-3 text-xl">Usage overview not provided.</p>
     }
   }
 </div>
