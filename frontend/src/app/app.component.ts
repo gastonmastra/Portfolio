@@ -1,16 +1,25 @@
-import { Component, HostBinding, OnInit, Signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+import { Component, HostBinding, Signal } from '@angular/core';
+import { DarkmodeComponent } from './shared/toolbar/darkmode.component';
 import { DarkmodeService } from './services/darkmode.service';
+import { HomeComponent } from './pages/home/home.component';
+import { StudiesComponent } from './pages/studies/studies.component';
+import { ExperienceComponent } from './pages/experience/experience.component';
+import { KnowledgeComponent } from './pages/knowledge/knowledge.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ToolbarComponent],
+  imports: [
+    DarkmodeComponent,
+    HomeComponent,
+    StudiesComponent,
+    ExperienceComponent,
+    KnowledgeComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Mastra';
   private darkmodeEnabled: Signal<boolean>;
 
@@ -22,6 +31,4 @@ export class AppComponent implements OnInit {
     return this.darkmodeEnabled();
   }
 
-  ngOnInit(): void {
-  }
 }

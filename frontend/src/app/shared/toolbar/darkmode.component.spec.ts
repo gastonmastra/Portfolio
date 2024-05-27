@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToolbarComponent } from './toolbar.component';
+import { DarkmodeComponent } from './darkmode.component';
 import { provideRouter } from '@angular/router';
 
 
 describe('ToolbarComponent', () => {
-  let component: ToolbarComponent;
-  let fixture: ComponentFixture<ToolbarComponent>;
+  let component: DarkmodeComponent;
+  let fixture: ComponentFixture<DarkmodeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('ToolbarComponent', () => {
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ToolbarComponent);
+    fixture = TestBed.createComponent(DarkmodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -26,7 +26,7 @@ describe('ToolbarComponent', () => {
   });
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(ToolbarComponent);
+    const fixture = TestBed.createComponent(DarkmodeComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Mastra');

@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MockExperienceService } from '../../services/mocks/mock-experience.service';
 
 @Component({
-  selector: 'app-experience',
+  selector: 'experience',
   standalone: true,
   imports: [ CommonModule, CardComponent ],
   providers: [ MockExperienceService ],

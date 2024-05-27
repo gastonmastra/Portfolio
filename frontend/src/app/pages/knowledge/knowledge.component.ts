@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, WritableSignal, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { TechnologyKnowledge } from '../../models/technology-knowledge';
 import { TechnologyComponent } from './technology/technology.component';
 import { ToolKnowledge } from '../../models/tool-knowledge';
@@ -6,7 +6,7 @@ import { Knowledge } from '../../models/knowledge';
 import { MockKnowledgeService } from '../../services/mocks/mock-knowledge.service';
 
 @Component({
-  selector: 'app-knowledge',
+  selector: 'knowledge',
   standalone: true,
   imports: [TechnologyComponent],
   providers: [ MockKnowledgeService ],
