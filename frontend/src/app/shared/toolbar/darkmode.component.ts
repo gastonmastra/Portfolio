@@ -6,10 +6,10 @@ import { RouterLink } from '@angular/router';
   selector: 'toolbar',
   standalone: true,
   imports: [ RouterLink ],
-  templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.css'
+  templateUrl: './darkmode.component.html',
+  styleUrl: './darkmode.component.css'
 })
-export class ToolbarComponent {
+export class DarkmodeComponent {
 
   darkmodeEnabled: Signal<boolean>;
 

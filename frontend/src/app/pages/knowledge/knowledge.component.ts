@@ -6,7 +6,7 @@ import { Knowledge } from '../../models/knowledge';
 import { MockKnowledgeService } from '../../services/mocks/mock-knowledge.service';
 
 @Component({
-  selector: 'app-knowledge',
+  selector: 'knowledge',
   standalone: true,
   imports: [TechnologyComponent],
   providers: [ MockKnowledgeService ],
