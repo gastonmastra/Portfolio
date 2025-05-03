@@ -1,8 +1,16 @@
-<div class="w-screen h-screen overflow-scroll bg-gradient-to-t from-sky-300 to-sky-50 dark:from-gray-950 dark:to-gray-600 text-black dark:text-white">
-  <div class="w-full pl-12 pr-12">
-    <home></home>
-    <knowledge></knowledge>
-    <experience></experience>
+<div class="w-screen h-full overflow-x-hidden bg-gradient-to-t from-sky-300 to-sky-50 dark:from-gray-950 dark:to-gray-600 text-black dark:text-white">
+  <div class="w-full">
+    <section class="home-section min-h-screen relative">
+      <home [title]="title"></home>
+    </section>
+    <div class="container max-w-6xl mx-auto px-4">
+      <section class="panel min-h-screen flex items-center justify-center">
+        <knowledge></knowledge>
+      </section>
+      <section class="panel min-h-screen flex items-center justify-center">
+        <experience></experience>
+      </section>
+    </div>
   </div>
 </div>
 <toolbar></toolbar>

@@ -1,16 +1,22 @@
 <div class="relative flex flex-col h-screen w-full justify-center items-center">
   <div class="overflow-clip">
     <div class="w-96 h-96 overflow-hidden rounded-full my-image">
-      <img src="assets/me.jpeg" class="my-image relative bottom-32" />
+      <img src="assets/me.jpeg" class="w-full h-full object-cover object-center" alt="Gastón Mastrapasqua's portrait"/>
     </div>
   </div>
   <div class="text-center">
-    <h1 class="text-3xl font-extrabold ">Gastón Mastrapasqua</h1>
+    <h1 class="text-3xl font-extrabold">{{title}}</h1>
     <div class="typing-effect">
       <h2 class="font-thin overflow-hidden whitespace-nowrap font-mono">
         <span class="subtitle"></span>
         <span class="cursor">|</span>
       </h2>
+    </div>
+  </div>
+  <div class="scroll-down text-center absolute bottom-5">
+    <p class="font-light font-mono">Scroll Down</p>
+    <div class="animate-bounce">
+      <p class="m-0 p-0 rotate-90 font-extralight">>></p>
     </div>
   </div>
 </div>

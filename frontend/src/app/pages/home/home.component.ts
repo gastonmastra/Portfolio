@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import gsap from 'gsap';
 
 @Component({
@@ -8,23 +8,25 @@ import gsap from 'gsap';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  @Input() title!: string;
+
   subtitles: string[] = [
     "Information Systems Engineer", 
     "Full Stack Developer",
   ]
-  ngOnInit(): void {
-    let cursor = gsap.to('.cursor',
-      {
-        opacity: 0,
-        ease: 'power2.inOut',
-        repeat: -1,
-        duration: 0.7
-      });
-    gsap.from('.overflow-clip', { y: '-50vh', duration: 1.5, ease: 'power3.out' });
-    gsap.from('.text-center', { y: '100vh', duration: 1.5, ease: 'power3.out' , 
-    onComplete: () => {subtitleTimeline.play()}});
 
-    let subtitleTimeline = gsap.timeline({repeat: -1}).pause();
+  ngOnInit(): void {
+    this._createWritingAnimation();
+  }
+
+
+  private _createWritingAnimation() {
+    let subtitleTimeline = gsap.timeline({ repeat: -1 }).pause();
+    this._animateCursor(subtitleTimeline);
+    this._animateSubtitle(subtitleTimeline);
+  }
+
+  private _animateSubtitle(subtitleTimeline: gsap.core.Timeline) {
     this.subtitles.forEach(subtitle => {
       let tl = gsap.timeline({
         repeat: 1, yoyo: true, repeatDelay: 2, delay: 0.5
@@ -38,4 +40,19 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  private _animateCursor(subtitleTimeline: gsap.core.Timeline) {
+    gsap.to('.cursor',
+      {
+        opacity: 0,
+        ease: 'power2.inOut',
+        repeat: -1,
+        duration: 0.7
+      });
+    let tl = gsap.timeline();
+    tl.from('.overflow-clip', { y: '-100vh', duration: 1.5, ease: 'power3.out' });
+    tl.from('.text-center', {
+      y: '100vh', duration: 1.5, ease: 'power3.out',
+      onComplete: () => { subtitleTimeline.play(); }
+    }, '<');
+  }
 }

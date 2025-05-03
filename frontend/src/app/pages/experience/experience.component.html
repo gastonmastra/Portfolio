@@ -3,7 +3,8 @@
   <card
     [title]="experience.title"
     [subtitle]="experience.company"
-    description="{{ experience.workingPeriod }}"
+    [description]="experience.workingPeriod"
+    [content]="experience.description"
   >
   </card>
   }
