@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TechnologyKnowledge } from '../../../models/technology-knowledge';
+import { Technology } from '../../../models/technology';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './technology.component.css'
 })
 export class TechnologyComponent {
-  @Input() technologyKnowledge: TechnologyKnowledge;
+  @Input() technologyKnowledge: Technology;
   @Input() scale: boolean = false;
   @Input() tooltip: string;
   

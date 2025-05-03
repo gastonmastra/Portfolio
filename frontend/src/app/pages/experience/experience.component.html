@@ -4,8 +4,22 @@
     [title]="experience.title"
     [subtitle]="experience.company"
     [description]="experience.workingPeriod"
-    [content]="experience.description"
   >
+    <div class="card-content w-full">
+      <p class="text-justify">{{ experience.description }}</p>
+      <ng-container *ngIf="experience.toolsUsed.length > 0">
+        <div class="my-4 border-t border-gray-200 dark:border-gray-700 pt-3">
+          <p class="text-center font-medium text-sm uppercase tracking-wider text-gray-600 dark:text-gray-300 mb-3">Tools used</p>
+          <div class="flex justify-center w-full">
+            <div class="flex flex-row flex-wrap gap-3 justify-center max-w-2xl">
+              @for (tool of experience.toolsUsed; track $index) {
+                <technology class="w-12 transition-transform hover:scale-110" [technologyKnowledge]="tool" [tooltip]="tool.name"></technology>
+              }
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </card>
   }
 </div>

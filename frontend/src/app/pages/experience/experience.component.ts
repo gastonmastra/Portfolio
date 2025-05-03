@@ -3,11 +3,12 @@ import { Job } from '../../models/job';
 import { CardComponent } from '../../shared/card/card.component';
 import { CommonModule } from '@angular/common';
 import { MockExperienceService } from '../../services/mocks/mock-experience.service';
+import { TechnologyComponent } from '../knowledge/technology/technology.component';
 
 @Component({
   selector: 'experience',
   standalone: true,
-  imports: [ CommonModule, CardComponent ],
+  imports: [ CommonModule, CardComponent, TechnologyComponent ],
   providers: [ MockExperienceService ],
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.css'
@@ -15,7 +16,7 @@ import { MockExperienceService } from '../../services/mocks/mock-experience.serv
 export class ExperienceComponent implements OnInit {
   experiences: Job[];
 
-  constructor(private _experienceService: MockExperienceService) {}
+  constructor(private readonly _experienceService: MockExperienceService) {}
 
   ngOnInit(): void {
     this._experienceService.getExperience().subscribe({

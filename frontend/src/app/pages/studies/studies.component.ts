@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { CardComponent } from '../../shared/card/card.component';
 import { Study } from '../../models/study';
 
 @Component({
   selector: 'app-studies',
   standalone: true,
-  imports: [CardComponent],
+  imports: [],
   templateUrl: './studies.component.html',
   styleUrl: './studies.component.css'
 })

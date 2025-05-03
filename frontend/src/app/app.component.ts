@@ -2,7 +2,6 @@ import { Component, HostBinding, OnInit, Signal } from '@angular/core';
 import { DarkmodeComponent } from './shared/toolbar/darkmode.component';
 import { DarkmodeService } from './services/darkmode.service';
 import { HomeComponent } from './pages/home/home.component';
-import { StudiesComponent } from './pages/studies/studies.component';
 import { ExperienceComponent } from './pages/experience/experience.component';
 import { KnowledgeComponent } from './pages/knowledge/knowledge.component';
 import gsap from 'gsap';
@@ -14,7 +13,6 @@ import { ScrollTrigger, TextPlugin } from 'gsap/all';
   imports: [
     DarkmodeComponent,
     HomeComponent,
-    StudiesComponent,
     ExperienceComponent,
     KnowledgeComponent
   ],
@@ -79,7 +77,7 @@ export class AppComponent implements OnInit {
   
     // Set initial scale for panels
     gsap.set(sections, {
-      scale: 0,
+      scale: 0.9,
       opacity: 0,
     });
   
@@ -93,9 +91,9 @@ export class AppComponent implements OnInit {
         ease: "power2.out",
         scrollTrigger: {
           trigger: section,
-          start: "top 80%", // Start animation when the panel is 80% from the top of viewport
-          end: "top 30%",
-          scrub: 1,
+          start: "top 85%", // Start animation earlier when the panel is 85% from the top
+          end: "top 40%",
+          scrub: 0.5, // Smoother scrubbing effect
           toggleActions: "play none none reverse"
         }
       });

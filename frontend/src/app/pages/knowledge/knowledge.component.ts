@@ -1,7 +1,7 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
-import { TechnologyKnowledge } from '../../models/technology-knowledge';
+import { Technology } from '../../models/technology';
 import { TechnologyComponent } from './technology/technology.component';
-import { ToolKnowledge } from '../../models/tool-knowledge';
+import { Tool } from '../../models/tool';
 import { Knowledge } from '../../models/knowledge';
 import { MockKnowledgeService } from '../../services/mocks/mock-knowledge.service';
 
@@ -14,15 +14,15 @@ import { MockKnowledgeService } from '../../services/mocks/mock-knowledge.servic
   styleUrl: './knowledge.component.css'
 })
 export class KnowledgeComponent implements OnInit {
-  private technologies: TechnologyKnowledge[];
-  private tools: ToolKnowledge[];
+  private technologies: Technology[];
+  private tools: Tool[];
   
-  technologiesShowed: WritableSignal<TechnologyKnowledge[]>;
-  toolsShowed: WritableSignal<ToolKnowledge[]>;
+  technologiesShowed: WritableSignal<Technology[]>;
+  toolsShowed: WritableSignal<Tool[]>;
 
   knowledgeSelected: Knowledge | null;
 
-  constructor(private _knowledegeService: MockKnowledgeService) {}
+  constructor(private readonly _knowledegeService: MockKnowledgeService) {}
 
   ngOnInit(): void {
     this._knowledegeService.getTechStack().subscribe({
@@ -45,7 +45,7 @@ export class KnowledgeComponent implements OnInit {
   public select(knowledge: Knowledge): void {
     this.toolsShowed.set([...this.tools]);
     this.technologiesShowed.set([...this.technologies]);
-    if (knowledge instanceof TechnologyKnowledge) 
+    if (knowledge instanceof Technology) 
       this.removeKnowledgeFromShowedList(knowledge, this.technologiesShowed);
     else 
       this.removeKnowledgeFromShowedList(knowledge, this.toolsShowed);
