@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  // Explicit so generation does not depend on tsconfig being present (e.g. during `npm ci` in Docker).
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Single-row table holding the portfolio owner's personal information.
+model Profile {
+  id          Int      @id @default(1)
+  firstName   String
+  lastName    String
+  headline    String   @default("")
+  about       String   @default("")
+  email       String?
+  location    String?
+  githubUrl   String?
+  linkedinUrl String?
+  updatedAt   DateTime @updatedAt
+}
+
+enum SkillCategory {
+  TECHNOLOGY
+  TOOL
+}
+
+model Skill {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  category    SkillCategory
+  description String?
+  sortOrder   Int           @default(0)
+  experiences Experience[]
+  projects    Project[]
+}
+
+model Experience {
+  id          Int       @id @default(autoincrement())
+  title       String
+  company     String
+  startDate   DateTime  @db.Date
+  endDate     DateTime? @db.Date
+  description String?
+  sortOrder   Int       @default(0)
+  skills      Skill[]
+}
+
+enum StudyModality {
+  PRESENTIAL
+  REMOTE
+}
+
+model Study {
+  id           Int           @id @default(autoincrement())
+  title        String
+  institution  String
+  modality     StudyModality
+  gradeAverage Float?
+  startYear    Int
+  endYear      Int?
+  description  String?
+  sortOrder    Int           @default(0)
+}
+
+model Project {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  url         String?
+  repoUrl     String?
+  startDate   DateTime? @db.Date
+  endDate     DateTime? @db.Date
+  sortOrder   Int       @default(0)
+  skills      Skill[]
+}

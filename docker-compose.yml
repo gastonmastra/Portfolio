@@ -1,14 +1,75 @@
-version: '3'
+name: portfolio
+
+x-backend: &backend
+  build: ./backend
+  environment:
+    DATABASE_URL: postgresql://portfolio:portfolio@db:5432/portfolio?schema=public
+    PUBLIC_API_PORT: 3000
+    ADMIN_API_PORT: 3001
 
 services:
-  frontend:
-    container_name: frontend
-    build: 
-      context: frontend
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend:/app/
-      - /app/node_modules
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: portfolio
+      POSTGRES_PASSWORD: portfolio
+      POSTGRES_DB: portfolio
     ports:
-      - "4200:4200"
-      
+      - "127.0.0.1:${DB_PORT:-5433}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U portfolio -d portfolio"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # Applies pending migrations and seeds an empty database, then exits.
+  migrate:
+    <<: *backend
+    command: sh -c "npx prisma migrate deploy && npx prisma db seed"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  public-api:
+    <<: *backend
+    command: node dist/public-main.js
+    ports:
+      - "${PUBLIC_API_PORT:-3000}:3000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  # Internal API: only reachable from this machine.
+  admin-api:
+    <<: *backend
+    command: node dist/admin-main.js
+    ports:
+      - "127.0.0.1:${ADMIN_API_PORT:-3001}:3001"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  public-web:
+    build:
+      context: ./frontend
+      args:
+        APP: public
+    ports:
+      - "${PUBLIC_WEB_PORT:-8090}:80"
+    depends_on:
+      - public-api
+
+  admin-web:
+    build:
+      context: ./frontend
+      args:
+        APP: admin
+    ports:
+      - "127.0.0.1:${ADMIN_WEB_PORT:-8091}:80"
+    depends_on:
+      - admin-api
+
+volumes:
+  db-data:

@@ -10,20 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up NodeJs
-        uses: actions/setup-node@v3
-        with: 
-          node-version: 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
-      - name: Install dependencies and build
+      - name: Install dependencies and build the public site
         working-directory: frontend
-        run: npm install && npm run build:prod
+        run: npm ci && npm run build:public:prod
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: frontend/dist/browser
+          folder: frontend/dist/public/browser
           branch: prod
           token: ${{ secrets.PAGE }}

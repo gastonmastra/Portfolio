@@ -1,0 +1,105 @@
+:host {
+  display: block;
+}
+
+.terminal {
+  max-width: 980px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 24px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+}
+
+.welcome {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.indent {
+  padding-left: 2ch;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+
+.menu button {
+  font: inherit;
+  color: var(--fg);
+  background: none;
+  border: 0;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.log {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: 1.5rem;
+}
+
+.entry {
+  scroll-margin-top: 16px;
+}
+
+.echo {
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.prompt {
+  color: var(--prompt);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.prompt-line {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  padding: 0.75rem 0 1rem;
+  background: var(--bg);
+  border-top: 1px solid #2a2a2a;
+}
+
+.prompt-line input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--fg);
+  caret-color: var(--accent);
+  background: transparent;
+  border: 0;
+  padding: 0.25rem 0;
+}
+
+.prompt-line input:focus-visible {
+  outline: none;
+}
+
+.prompt-line:focus-within {
+  border-top-color: var(--accent);
+}

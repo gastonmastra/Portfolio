@@ -1,0 +1,137 @@
+:root {
+  --bg: #0c0c0c;
+  --surface: #141414;
+  --fg: #e8e6e3;
+  --dim: #a3a3a3;
+  --accent: #d97757;
+  --prompt: #8ccf7e;
+  --link: #79c0ff;
+  --error: #ff7b72;
+  --font: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dim {
+  color: var(--dim);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.error {
+  color: var(--error);
+}
+
+/* Shared look for every command output block. */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  font-size: 1rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  border-top: 1px dashed #4a4a4a;
+}
+
+.entries {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 0.75rem;
+}
+
+.entries h3,
+.entries h4 {
+  font-size: 1rem;
+}
+
+.entries h3::before,
+.entries h4::before {
+  content: '▸ ';
+  color: var(--accent);
+}
+
+.entry-body {
+  padding-left: 2ch;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.tags {
+  color: var(--prompt);
+}
+
+.reveal {
+  animation: reveal 280ms steps(8, end);
+}
+
+@keyframes reveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}

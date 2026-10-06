@@ -1,0 +1,84 @@
+<main class="terminal">
+  <header class="header">
+    @if (owner(); as me) {
+      <app-banner [firstName]="me.firstName" [lastName]="me.lastName" />
+    } @else {
+      <app-banner firstName="Portfolio" lastName="" />
+    }
+
+    <section class="welcome" aria-label="Welcome">
+      <p>
+        <span class="accent" aria-hidden="true">✻</span>
+        Welcome to
+        @if (fullName()) {
+          <strong>{{ fullName() }}</strong>'s portfolio!
+        } @else {
+          the portfolio!
+        }
+      </p>
+      @if (owner()?.headline; as headline) {
+        <p class="dim indent">{{ headline }}</p>
+      }
+      <p class="dim indent">Type an option number and press Enter, or click it. <span class="accent">help</span> lists every command.</p>
+    </section>
+
+    <nav aria-label="Portfolio sections">
+      <ul class="menu">
+        @for (option of menu; track option.key) {
+          <li>
+            <button type="button" (click)="run(option.key)">
+              <span class="accent" aria-hidden="true">[{{ option.key }}]</span>
+              {{ option.label }}
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+  </header>
+
+  <div #log class="log" role="log" aria-label="Console output">
+    @for (entry of entries(); track entry.id) {
+      <section class="entry reveal" [attr.aria-label]="'Output of ' + entry.input">
+        <p class="echo" aria-hidden="true">
+          <span class="prompt">{{ promptUser() }}&#64;portfolio:~$</span> {{ entry.input }}
+        </p>
+        @switch (entry.output) {
+          @case ('experience') { <app-experience-section /> }
+          @case ('studies') { <app-studies-section /> }
+          @case ('projects') { <app-projects-section /> }
+          @case ('skills') { <app-skills-section /> }
+          @case ('about') { <app-about-section /> }
+          @case ('help') { <app-help-output /> }
+          @default {
+            <p class="error">
+              command not found: {{ entry.input }}. Type <span class="accent">help</span> to see the available options.
+            </p>
+          }
+        }
+      </section>
+    }
+  </div>
+
+  <form class="prompt-line" (submit)="onSubmit($event)">
+    <label for="command" class="prompt">
+      <span aria-hidden="true">{{ promptUser() }}&#64;portfolio:~$</span>
+      <span class="visually-hidden">Command</span>
+    </label>
+    <input
+      #commandInput
+      id="command"
+      type="text"
+      [formField]="commandForm.command"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+      enterkeyhint="go"
+      aria-describedby="command-hint"
+      (keydown.arrowup)="browseHistory($event, -1)"
+      (keydown.arrowdown)="browseHistory($event, 1)"
+    />
+    <span id="command-hint" class="visually-hidden">
+      Enter an option number from 1 to {{ menu.length }}, help or clear, then press Enter.
+    </span>
+  </form>
+</main>
